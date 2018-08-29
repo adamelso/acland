@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Chat</h1>
+
+    {% if messages|length %}
+        <dl>
+        {% for m in messages %}
+            <dt>{{ m.author.username }}</dt>
+            <dd><em>{{ m.createdAt|date('H:i') }}</em>: {{ m.content }}
+                [<a href="{{ path('edit', { id: m.id }) }}">Edit</a>]</dd>
+        {% endfor %}
+        </dl>
+    {% else %}
+        No banter yet, go ahead and break the silence.
+    {% endif %}
+
+    {{ form(chatbox) }}
+
+{% endblock %}

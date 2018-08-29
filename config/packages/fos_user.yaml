@@ -1,0 +1,7 @@
+fos_user:
+    db_driver: orm
+    user_class: App\Entity\UserAccount
+    firewall_name: main
+    from_email:
+        address: "adam@veruscript.com"
+        sender_name: "adam@veruscript.com"
