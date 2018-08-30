@@ -53,22 +53,22 @@ class GrantPermissionsCommand extends Command
         $username = $i->getArgument('username');
         $messageId = $i->getArgument('message-id');
 
-        $u = $this->userManager->findUserByUsernameOrEmail($username);
+        $user = $this->userManager->findUserByUsernameOrEmail($username);
 
-        if (! $u) {
+        if (! $user) {
             $o->writeln("<error>Who the hell is {$username}?!</error>");
             return 1;
         }
 
-        $messages = $this->doctrine->getRepository(Message::class);
-        $m = $messages->find($messageId);
+        $repository = $this->doctrine->getRepository(Message::class);
+        $message = $repository->find($messageId);
 
-        if (! $m) {
+        if (! $message) {
             $o->writeln("<error>No message with ID {$username}.</error>");
             return 1;
         }
 
-        $this->grantAllPermissionsOnMessageForUser($u, $m);
+        $this->grantAllPermissionsOnMessageForUser($user, $message);
 
         $o->writeln("<info>{$username} has now been granted all permissions on message #{$messageId}.</info>");
 
